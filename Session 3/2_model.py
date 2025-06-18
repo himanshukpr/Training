@@ -10,3 +10,12 @@ del a_age # this will just delete the reference of the variable a_age from the s
 # print(a_age, id(a_age), type(a_age))
 print(b_age, id(b_age), type(b_age))
 print(c_age, id(c_age), type(c_age))
+
+# hashing function
+# Bucket size = 11
+# f(x) X % size
+
+# X = 100
+
+
+ 
