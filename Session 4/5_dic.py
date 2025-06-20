@@ -31,3 +31,53 @@ restaurant = {
 print(restaurant["name"])
 print(restaurant["operating hours"])
 print(restaurant["food"][0])
+
+
+chat = {
+    "bisman":[
+        {
+            "by":"bisman",
+            "message":"hello",
+            "sent": "10.00 AM",
+            "recived": "10.01 AM",
+            "read": "10.01 AM",
+        },
+        {
+            "by":"himanshu",
+            "message":"how are you???",
+            "sent": "10.10 AM",
+            "recived": "10.15 AM",
+            "read": "10.31 AM",
+        },
+        {
+            "by":"bisman",
+            "message":"Nothing free",
+            "sent": "11.00 AM",
+            "recived": "11.00 AM",
+            "read": "11.10 AM",
+        }
+    ],
+    "Jaiveer":[
+        {
+            "by":"Jaiveer",
+            "message":"hello",
+            "sent": "10.00 AM",
+            "recived": "10.01 AM",
+            "read": "10.01 AM",
+        },
+        {
+            "by":"himanshu",
+            "message":"how are you???",
+            "sent": "10.10 AM",
+            "recived": "10.15 AM",
+            "read": "10.31 AM",
+        },
+        {
+            "by":"Jaiveer",
+            "message":"Nothing free",
+            "sent": "11.00 AM",
+            "recived": "11.00 AM",
+            "read": "11.10 AM",
+        }
+    ]
+}
