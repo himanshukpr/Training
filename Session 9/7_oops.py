@@ -12,7 +12,7 @@ in real world:
 
     Principle of oops
         1. think about the object
-        2. create its representation i.w. class
+        2. create its representation i.e. class
         3. from class create a real object
 
 in computer science
