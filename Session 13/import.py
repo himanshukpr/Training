@@ -12,7 +12,7 @@ flight1 = Flight(carrier='indigo',
 flight2 = Flight(carrier='air india',
                 flight_code='AI203',
                 source='Delhi',
-                destination='Mumbai',
+                destination='Bangaluru',
                 duration='01.45',
                 departure='07.10',
                 arrival='08.55',
@@ -33,4 +33,4 @@ flightlist.add(flight3)
 
 # flightlist.search('AI203')
 
-flightlist.filter(source='Delhi',destination='Mumbai')
+flightlist.filter(source='Delhi',destination='Bangaluru')
