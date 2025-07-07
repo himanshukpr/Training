@@ -20,7 +20,6 @@ class Flightlist:
 
             for j in range(self.size-i-1):
 
-                current = current.next
                 if current.next!=None:
 
                     if current.fare > current.next.fare:
