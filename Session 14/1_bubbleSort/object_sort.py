@@ -24,7 +24,7 @@ class Flight:
         self.next = None
 
     def show(self):
-        print(self.pre.flight_code)
+
         print(f"~~~~~~~~~~~~~~~~~~~~~~~~~~{self.flight_code}~~~~~~~~~~~~~~~~~~~~~~~~~~")
         print(f"Carrier: {self.carrier}")
         print(f"Source: {self.source} and Destination: {self.destination}")
@@ -32,7 +32,8 @@ class Flight:
         print(f"Departure: {self.departure} and Arrival: {self.arrival}")
         print(f"Fare: \u20b9 {self.fare}")
         print(f"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-        print(self.next.flight_code)
+
+        # print(self.next.flight_code)
 
 
 

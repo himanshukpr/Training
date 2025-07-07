@@ -8,7 +8,7 @@ f1 =  Flight(carrier='indigo',
                  duration='05.50',
                  departure='02.30',
                  arrival='08.20',
-                 fare=6489)
+                 fare=8)
 
 f2 = Flight(carrier='air india',
                 flight_code='AI203',
@@ -17,7 +17,7 @@ f2 = Flight(carrier='air india',
                 duration='01.45',
                 departure='07.10',
                 arrival='08.55',
-                fare=4820)
+                fare=1)
                 
 f3 = Flight(carrier='vistara',
                 flight_code='UK611',
@@ -26,13 +26,16 @@ f3 = Flight(carrier='vistara',
                 duration='02.35',
                 departure='12.00',
                 arrival='14.35',
-                fare=5795)
+                fare=2)
+
 
 
 flightlist = Flightlist()
 flightlist.add(f1)
 flightlist.add(f2)
 flightlist.add(f3)
+print('-----------------------------')
 
+flightlist.bubble_sort()
 
-f2.show()
+flightlist.show()
