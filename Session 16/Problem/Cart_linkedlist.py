@@ -139,54 +139,6 @@ class Cart:
 
 
     def sort(self):
-        print('sorting')
-        def swap_node(a,b):
-            pre = a.pervious
-            next = b.next
-
-            pre.next = b
-            b.previous = pre
-
-            b.next = a
-            a.previous = b
-
-            a.next = next
-            next.previous = a
-
-            if self.head == a:
-                self.head = b
-            if self.tail == b:
-                self.tail = a
-
-            # prev = a.previous
-            # next = b.next
-
-            # prev.next = b
-            # b.previous = prev
-
-            # b.next = a
-            # a.previous = b
-
-            # a.next = next
-            # next.previous = a
-
-            # # Update head and tail if needed
-            # if self.head == a:
-            #     self.head = b
-            # if self.tail == b:
-            #     self.tail = a
-
-
-
-            for i in range(self.size):
-                current = self.head
-                for j in range(self.size-i-1):
-                    if current.price > current.next.price:
-                        swap(current,current.next)
-                    else:
-                        current = current.next
-
-    # def sort(self):
         def swap_nodes(a, b):
             # Swap two adjacent nodes a and b where b = a.next
             prev = a.previous
@@ -212,8 +164,6 @@ class Cart:
             for j in range(self.size - i - 1):
                 if current.price > current.next.price:
                     swap_nodes(current, current.next)
-                    # After swapping, current still points to the first node in the pair,
-                    # so move current to next node to continue
                     # current = current.previous
                 else:
                     current = current.next
