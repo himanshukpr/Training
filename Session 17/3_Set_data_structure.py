@@ -34,7 +34,7 @@ print("Is John's followers a superset of Fionna's followers?", result)
 
 
 
-a = {1, 2, 3, 4, 5}
+a = {1, 2, 3, 4, 5,6}
 b = {1, 2, 3, 4, 5}
 
 # c = a + b

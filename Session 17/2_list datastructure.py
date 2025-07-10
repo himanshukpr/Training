@@ -51,5 +51,5 @@ numbers.clear()
 
 print('after clearing:', numbers)
 data = [10, 20, 30, 40]
-data.insert(2, 2)
+data.insert(2, 200)
 print('after inserting 5 at index 0:', data)

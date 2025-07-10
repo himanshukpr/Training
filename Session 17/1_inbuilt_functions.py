@@ -21,7 +21,7 @@
     2. Negatice indexing
     3. Slicing
     4. Concatenation
-    5. Multiplicaty
+    5. multiplicity
     6. Mumbership testing
 
 
@@ -105,7 +105,7 @@ print(data2)
 
 # membership testing
 data = [10,20,30,40,50]
-print(10 in data)
+print("here:",60 not in data)
 
 
 data = {10,20,30,40,50} # set (tree set)
