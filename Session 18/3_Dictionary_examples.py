@@ -16,5 +16,5 @@ students = ['Alice', 'Bob', 'Charlie', 'David', 'Eve']
 
 
 attendance = {}.fromkeys(students, {}.fromkeys(months_list, 100))
-
+attendance['Bob']['january'] -= 10
 print(attendance)
