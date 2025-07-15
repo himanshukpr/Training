@@ -15,10 +15,23 @@ sql = CREATE TABLE consulation ( c_id int PRIMARY KEY auto_increment,
                                 created_on datetime
                                 foreign key (p_id) references patients(p_id)
                             );
+                            CREATE TABLE consulation (
+    c_id INT PRIMARY KEY AUTO_INCREMENT,
+    p_id INT,
+    remarks TEXT,
+    medicine TEXT,
+    followup DATETIME,
+    created_on DATETIME,
+    FOREIGN KEY (p_id) REFERENCES patients(p_id)
+);
 
 
 
 """
+
+# model or object or entity
+
+
 import datetime
 
 class Consultation:

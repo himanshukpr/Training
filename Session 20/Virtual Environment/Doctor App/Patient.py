@@ -17,7 +17,11 @@ sql = CREATE TABLE  patients (p_id INTEGER PRIMARY KEY auto_increment,
                                 created_on datetime
                                 );
 
+        INSERT INTO patients VALUES(NULL, 'Himanshu', '1234567890', 'himanshu@gmail.com', '1990-01-01', 'Male', datetime.datetime.now())
+
 """
+
+# model or object or entity
 import datetime
 
 class Patient:
@@ -31,7 +35,6 @@ class Patient:
         self.created_on = None
 
     def input_patient(self):
-        self.p_id = input("Enter Patient ID: ")
         self.name = input("Enter Name: ")
         self.phone = input("Enter Phone: ")
         self.email = input("Enter Email: ")
