@@ -4,12 +4,12 @@
 import mysql.connector as db
 
 class DBhelper:
-    def __init__(self):
+    def __init__(self, username, password, host, database):
         self.connection = connection = db.connect(
-                            username='root',
-                            password='himanshu',
-                            host='127.0.0.1',
-                            database = 'training'
+                            username=username,
+                            password=password,
+                            host=host,
+                            database = database
                             )
 
 
@@ -19,8 +19,8 @@ class DBhelper:
     def write(self,sql_query):
         print("Executing SQL query:", sql_query)
         self.cursor.execute(sql_query)
-        print("(write) sql query executed successfully.")
         self.connection.commit()
+        print("(write) sql query executed successfully.")
 
 
     def read(self,sql_query):

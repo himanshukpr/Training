@@ -11,20 +11,25 @@ class DoctorsApp:
         print('App stated at',datetime.datetime.now())
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
-        self.db_helper = DBhelper()
+        self.db_helper = DBhelper(
+                                    username='root',
+                                    password='himanshu',
+                                    host='127.0.0.1',
+                                    database = 'training'
+                                )   
 
 
     def show_main_menu(self):
         while True:
             print("1. For Patient")
             print("2. For Consultation")
-            print("3. Quit")
+            print("0. Quit")
             choice = int(input('Enter you choice: '))
             if choice == 1:
                 self.show_patient_menu()
             elif choice == 2:
                 self.show_consultation_menu()
-            elif choice == 3:
+            elif choice == 0:
                 self.db_helper.close()
                 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
                 print('Thanks for using doctors app')
@@ -43,7 +48,7 @@ class DoctorsApp:
             print("5. Fetch Patient by Phone Number")
             print("6. Fetch Male Patient")
             print("7. Fetch Female Patient")
-            print("8. Quit")
+            print("0. Quit")
             choice = int(input('Enter you choice: '))
             if choice == 1:
                 patient = Patient()
@@ -95,7 +100,7 @@ class DoctorsApp:
                     print(row)
 
                 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-            elif choice == 8:
+            elif choice == 0:
                 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
                 print('Patient Menu Closing...')
                 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
@@ -111,7 +116,7 @@ class DoctorsApp:
             print("3. Delete Existing consultation")
             print("4. Fetch All Existing consultation")
             print("5. Fetch consultation by Patient")
-            print("6. Quit")            
+            print("0. Quit")            
             choice = int(input('Enter you choice: '))
             if choice == 1:
                 pass
@@ -123,7 +128,7 @@ class DoctorsApp:
                 pass
             elif choice == 5:
                 pass
-            elif choice == 6:
+            elif choice == 0:
                 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
                 print('Patient Menu Closing...')
                 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
