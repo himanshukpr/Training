@@ -11,13 +11,11 @@ def main():
     client = MongoClient(uri, server_api=ServerApi('1'))
     print('Connection created with mongo :)')
     
-    document ={"_id":{"$oid":"6879e42b64e09455b43df103"},"name":"jack","age":{"$numberInt":"45"},"email":"ero@gmail.com"}
-    query = {'email':'jack@gmail.com'}
+    document ={"name":"jack","age":{"$numberInt":"45"},"email":"jack@gmail.com"}
+    query = {'email':'ero@gmail.com'}
     db = client['user']
     result = db['user'].update_one(query,{'$set':document})
     print(result)
-    # {"_id":{"$oid":"6879e42b64e09455b43df103"},"name":"jack","age":{"$numberInt":"45"},"email":"ero@gmail.com"}
-
-
+    
 if __name__ == "__main__":
     main()
