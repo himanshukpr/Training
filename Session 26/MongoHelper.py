@@ -125,7 +125,7 @@ class MongoDBHelper:
     
 
     def fetch(self,query=''):
-        documents = self.collection.find()
+        documents = self.collection.find(query)
         return list(documents)
         
     
