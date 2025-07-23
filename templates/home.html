@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Bootstrap Example</title>
+  <title>Doctor's App | Home</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -11,7 +11,7 @@
 </head>
 
 <body style="background: #f5f6fa;">
-  <nav class="navbar navbar-inverse">
+  <nav class="navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="/home">
@@ -19,9 +19,9 @@
         </a>
       </div>
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Add Patients</a></li>
-        <li><a href="#">View Patients</a></li>
+        <li class="active"><a href="/home">Home</a></li>
+        <li><a href="/add-patient">Add Patients</a></li>
+        <li><a href="/fetch-patients">View Patients</a></li>
         <li><a href="#">Add Consultation</a></li>
         <li><a href="#">View Consultation</a></li>
       </ul>
@@ -31,7 +31,12 @@
     </div>
   </nav>
   <div class="container">
+
+  
     <h2>Home Page</h2>
+    <p>Welcome {{name}}</p>
+    <p>{{email}}</p>
+    <p>you loged in at {{login_at}}</p>
 
   </div>
   </div>

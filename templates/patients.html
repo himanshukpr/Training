@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Doctor's App | View Patients</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body style="background: #f5f6fa;">
+    <nav class="navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/home">
+                    Doctor's App
+                </a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li ><a href="/home">Home</a></li>
+                <li><a href="/add-patient">Add Patients</a></li>
+                <li class="active"><a href="/fetch-patients">View Patients</a></li>
+                <li><a href="#">Add Consultation</a></li>
+                <li><a href="#">View Consultation</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/" style="font-weight:bold;"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+
+
+        <h2>All Patients</h2>
+        <p>Total Patients: {{total}}</p>
+        <div class="container mt-3">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone No</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Gender</th>
+                        <th>Age</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for patient in patients %}
+                    <tr>
+                        <td>{{patient['name']}}</td>
+                        <td>{{patient['phone']}}</td>
+                        <td>{{patient['email']}}</td>
+                        <td>{{patient['address']}}</td>
+                        <td>{{patient['gender']}}</td>
+                        <td>{{patient['age']}}</td>
+                        <td>
+                            <button class="btn-primary">Edit</button>
+                            <button class="btn-success">Delete</button>
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    </div>
+
+</body>
+
+</html>
