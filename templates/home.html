@@ -8,38 +8,75 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    body {
+      background: #f5f6fa;
+      padding-bottom: 20px;
+    }
+    .navbar-inverse {
+      background-color: #3498db;
+      border-color: #2980b9;
+    }
+    .navbar-inverse .navbar-brand, 
+    .navbar-inverse .navbar-nav > li > a {
+      color: white;
+    }
+    .navbar-inverse .navbar-nav > .active > a,
+    .navbar-inverse .navbar-nav > .active > a:focus,
+    .navbar-inverse .navbar-nav > .active > a:hover {
+      background-color: #2980b9;
+    }
+    .welcome-header {
+      background-color: #3498db;
+      color: white;
+      padding: 20px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 
-<body style="background: #f5f6fa;">
-  <nav class="navbar-inverse">
+<body>
+  <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
         <a class="navbar-brand" href="/home">
-          Doctor's App
+          <span class="glyphicon glyphicon-plus-sign"></span> Doctor's App
         </a>
       </div>
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/home">Home</a></li>
-        <li><a href="/add-patient">Add Patients</a></li>
-        <li><a href="/fetch-patients">View Patients</a></li>
-        <li><a href="#">Add Consultation</a></li>
-        <li><a href="#">View Consultation</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="/" style="font-weight:bold;"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-      </ul>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+          <li><a href="/add-patient"><span class="glyphicon glyphicon-plus"></span> Add Patients</a></li>
+          <li><a href="/fetch-patients"><span class="glyphicon glyphicon-list"></span> View Patients</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-edit"></span> Add Consultation</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-file"></span> View Consultation</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+      </div>
     </div>
   </nav>
-  <div class="container">
-
   
-    <h2>Home Page</h2>
-    <p>Welcome {{name}}</p>
-    <p>{{email}}</p>
-    <p>you loged in at {{login_at}}</p>
-
-  </div>
-  </div>
+  <div class="container">
+    <div class="welcome-header">
+      <div class="row">
+        <div class="col-md-6">
+          <h2><span class="glyphicon glyphicon-user"></span> Welcome, Dr. {{name}}</h2>
+          <p><span class="glyphicon glyphicon-envelope"></span> {{email}}</p>
+          <p><span class="glyphicon glyphicon-time"></span> Last login: {{login_at}}</p>
+        </div>
+        <div class="col-md-6 text-right">
+          <h3>Today: July 25, 2025</h3>
+        </div>
+      </div>
+    </div>
 
 </body>
 

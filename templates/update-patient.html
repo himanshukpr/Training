@@ -51,7 +51,7 @@
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
           <li><a href="/home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-          <li  class="active"><a href="/add-patient"><span class="glyphicon glyphicon-plus"></span> Add Patients</a></li>
+          <li><a href="/add-patient"><span class="glyphicon glyphicon-plus"></span> Add Patients</a></li>
           <li><a href="/fetch-patients"><span class="glyphicon glyphicon-list"></span> View Patients</a></li>
           <li><a href="#"><span class="glyphicon glyphicon-edit"></span> Add Consultation</a></li>
           <li><a href="#"><span class="glyphicon glyphicon-file"></span> View Consultation</a></li>
@@ -68,19 +68,19 @@
             <div class="col-md-6 col-md-offset-3">
                 <div class="panel panel-success" style="box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                     <div class="panel-heading text-center" style="padding: 30px 0;">
-                        <h3 style="margin:0;">Add Patient</h3>
+                        <h3 style="margin:0;">Update Patient</h3>
                     </div>
                     <div class="panel-body" style="padding: 30px;">
                         <!-- Placeholder for error/success messages -->
                         <div id="message" class="alert" style="display:none;"></div>
 
-                        <form class="form-horizontal" action="/add-patient-details" method="post">
+                        <form class="form-horizontal" action="/update-patient-details/{{data['_id']}}" method="post">
 
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="name">Name:</label>
                                 <div class="col-sm-10 input-group">
                                     <input type="text" class="form-control" id="name" placeholder="Enter name"
-                                        name="name" required>
+                                        name="name" required value="{{data['name']}}">
                                 </div>
                             </div>
 
@@ -88,7 +88,7 @@
                                 <label class="control-label col-sm-2" for="phone">Phone:</label>
                                 <div class="col-sm-10 input-group">
                                     <input type="tel" class="form-control" id="phone" placeholder="Enter phone number"
-                                        name="phone" required>
+                                        name="phone" required value="{{data.phone}}">
                                 </div>
                             </div>
 
@@ -96,7 +96,7 @@
                                 <label class="control-label col-sm-2" for="email">Email:</label>
                                 <div class="col-sm-10 input-group">
                                     <input type="email" class="form-control" id="email" placeholder="Enter email"
-                                        name="email" required>
+                                        name="email" required value="{{data.email}}">
                                 </div>
                             </div>
 
@@ -104,7 +104,7 @@
                                 <label class="control-label col-sm-2" for="address">Address:</label>
                                 <div class="col-sm-10 input-group">
                                     <input type="text" class="form-control" id="address" placeholder="Enter address"
-                                        name="address" required>
+                                        name="address" required value="{{data.address}}">
                                 </div>
                             </div>
 
@@ -112,10 +112,17 @@
                                 <label class="control-label col-sm-2" for="gender">Gender:</label>
                                 <div class="col-sm-10 input-group">
                                     <select class="form-control" id="gender" name="gender" required>
-                                        <option value="">Select gender</option>
-                                        <option value="male">Male</option>
+                                        {% if data['gender'] == 'male' %}
+                                        <option value="male" selected>Male</option>
                                         <option value="female">Female</option>
                                         <option value="other">Other</option>
+                                        {% else %}
+                                        <option value="">Select gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female" selected>Female</option>
+                                        <option value="other">Other</option>
+                                        {% endif %}
+                                        
                                     </select>
                                 </div>
                             </div>
@@ -124,16 +131,14 @@
                                 <label class="control-label col-sm-2" for="age">Age:</label>
                                 <div class="col-sm-10 input-group">
                                     <input type="number" class="form-control" id="age" placeholder="Enter age"
-                                        name="age" required>
+                                        name="age" required value="{{data.age}}">
                                 </div>
                             </div>
 
 
-
-
                             <div class="form-group">
                                 <div class="col-sm-12 text-center">
-                                    <button type="submit" class="btn btn-success btn-block" style="font-size:16px;">Add
+                                    <button type="submit" class="btn btn-success btn-block" style="font-size:16px;">Update
                                         Patient</button>
                                 </div>
                             </div>
