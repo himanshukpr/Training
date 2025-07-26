@@ -1,3 +1,5 @@
+import datetime
+
 class Patient:
     def __init__(self, name, phone, email, address, gender, age, doctor_id):
         self.name = name
@@ -7,6 +9,7 @@ class Patient:
         self.gender = gender
         self.age = age
         self.doctor_id = doctor_id
+        self.created_at = datetime.datetime.now()
 
     def to_document(self):
         return vars(self)

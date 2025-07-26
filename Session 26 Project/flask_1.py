@@ -5,6 +5,7 @@ import hashlib
 import datetime
 from Patient import Patient
 from bson.objectid import ObjectId
+from consultation import Consultation
 
 app = Flask('app')
 db = MongoDBHelper()
@@ -182,7 +183,68 @@ def update_patient_details(id):
     else:
         return redirect('error.html',message = 'Something went wrong, please try again later')
    
+
+@app.route('/add-consultation/<id>')
+def add_consultation(id):
+    if len(session['user_id']) > 0:
+        db.select_db(collection='Patient')
+        query = {
+            '_id': ObjectId(id)
+        }
+        patient = db.fetch(query)[0]
+        if len(patient) > 0:
+            session['patient_id'] = str(patient['_id'])
+            return render_template('add-consultation.html', id=id, data = patient)
+        else:
+            return render_template('error.html', message='Patient not found, please try again later')
+    else:
+        return redirect('/')
     
+@app.route('/add-consultation-details', methods=['POST'])
+def add_consultation_details():
+    # bphigh, bplow, fever, weigth, sugar,remarks, medicine, follow_up
+
+    consultation = Consultation(
+        bphigh=request.form['bphigh'],
+        bplow=request.form['bplow'],
+        fever=request.form['fever'],
+        weight=request.form['weight'],
+        sugar=request.form['sugar'],
+        remarks=request.form['remarks'],
+        medicine=request.form['medicine'],
+        follow_up=request.form['follow_up'],
+        patient_id=session['patient_id'],
+        doctor_id=session['user_id']
+    )
+    session['patient_id'] = ''
+
+    db.select_db(collection='Consultation')
+    result = db.insert(consultation.to_document())
+
+    if result:
+        return redirect('/fetch-patients')
+    else:
+        return redirect('error.html',message = 'Something went wrong, please try again later')
+   
+    
+@app.route('/close_consultation')
+def close_consultation():
+    return redirect('/fetch-patients')
+
+@app.route('/view-consultation/<id>')
+def fetch_consultation(id):
+    if len(session['user_id']) > 0:
+
+        db.select_db(collection='Consultation')
+        query = {
+            'doctor_id':session['user_id'],
+            'patient_id':id
+        }
+        documents = db.fetch(query)
+        return render_template('view-consultation.html',total = len(documents), consultations = documents)
+        
+    else:
+        return redirect('/')
 
 def main():
     # secret key is used to session management, it is required for session management

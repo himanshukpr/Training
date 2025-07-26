@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Doctor's App | View Patients</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background: #f5f6fa;
+            padding-bottom: 20px;
+        }
+
+        .navbar-inverse {
+            background-color: #3498db;
+            border-color: #2980b9;
+        }
+
+        .navbar-inverse .navbar-brand,
+        .navbar-inverse .navbar-nav>li>a {
+            color: white;
+        }
+
+        .navbar-inverse .navbar-nav>.active>a,
+        .navbar-inverse .navbar-nav>.active>a:focus,
+        .navbar-inverse .navbar-nav>.active>a:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body style="background: #f5f6fa;">
+
+    <div class="container">
+
+        <h2>All Consultation</h2>
+        <p>Total Consultations: {{total}}</p>
+        <div class="container mt-3">
+            {% if consultations %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>bphigh</th>
+                        <th>bplow</th>
+                        <th>fever</th>
+                        <th>weight</th>
+                        <th>sugar</th>
+                        <th>remarks</th>
+                        <th>medicine</th>
+                        <th>follow_up</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for consultation in consultations %}
+                    <tr>
+                        <td>{{consultation['bphigh']}}</td>
+                        <td>{{consultation['bplow']}}</td>
+                        <td>{{consultation['fever']}}</td>
+                        <td>{{consultation['weight']}}</td>
+                        <td>{{consultation['sugar']}}</td>
+                        <td>{{consultation['remarks']}}</td>
+                        <td>{{consultation['medicine']}}</td>
+                        <td>{{consultation['follow_up']}}</td>
+                        <td>
+                            <button>Click me</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <div class="alert alert-danger">
+                <strong>Error!</strong> No Consulation found
+            </div>
+            {% endif %}
+            <a href="/fetch-patients"><button class="btn-success">Close</button></a>
+
+        </div>
+
+    </div>
+    </div>
+
+</body>
+
+</html>

@@ -51,8 +51,7 @@
           <li><a href="/add-patient"><span class="glyphicon glyphicon-plus"></span> Add Patients</a></li>
           <li class="active"><a href="/fetch-patients"><span class="glyphicon glyphicon-list"></span> View Patients</a>
           </li>
-          <li><a href="#"><span class="glyphicon glyphicon-edit"></span> Add Consultation</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-file"></span> View Consultation</a></li>
+          
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -91,7 +90,8 @@
             <td>
               <a href="/update-patient/{{patient['_id']}}"><button class="btn-success">Edit</button></a>
               <a href="/delete-patient/{{patient['_id']}}"><button class="btn-primary">Delete</button></a>
-              <button class="btn-success">Consultation</button>
+              <a href="/add-consultation/{{patient['_id']}}"><button class="btn-success">Add Consultation</button></a>
+              <a href="/view-consultation/{{patient['_id']}}"><button class="btn-success">View Consultation</button></a>
             </td>
           </tr>
           {% endfor %}

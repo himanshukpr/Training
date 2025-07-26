@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Doctor's App | Add Patient</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    body {
+      background: #f5f6fa;
+      padding-bottom: 20px;
+    }
+
+    .navbar-inverse {
+      background-color: #3498db;
+      border-color: #2980b9;
+    }
+
+    .navbar-inverse .navbar-brand,
+    .navbar-inverse .navbar-nav>li>a {
+      color: white;
+    }
+
+    .navbar-inverse .navbar-nav>.active>a,
+    .navbar-inverse .navbar-nav>.active>a:focus,
+    .navbar-inverse .navbar-nav>.active>a:hover {
+      background-color: #2980b9;
+    }
+
+    .dashboard-panel {
+      border-radius: 4px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body style="background: #f5f6fa;">
+
+  <div class="container" style="margin-top: 60px;">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-success" style="box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <div class="panel-heading text-center" style="padding: 30px 0;">
+            <h3 style="margin:0;">Add Consultation for {{data['name']}}</h3>
+          </div>
+          <div class="panel-body" style="padding: 30px;">
+            <!-- Placeholder for error/success messages -->
+            <div id="message" class="alert" style="display:none;"></div>
+
+            <form class="form-horizontal" action="/add-consultation-details" method="post">
+
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="bphigh">BP High:</label>
+                <div class="col-sm-10 input-group">
+                  <input type="number" class="form-control" id="bphigh" placeholder="Enter high blood pressure"
+                    name="bphigh" required value="120">
+                  <span class="input-group-addon">mmHg</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="bplow">BP Low:</label>
+                <div class="col-sm-10 input-group">
+                  <input type="number" class="form-control" id="bplow" placeholder="Enter low blood pressure"
+                    name="bplow" required value="80">
+                  <span class="input-group-addon">mmHg</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="fever">Temperature:</label>
+                <div class="col-sm-10 input-group">
+                  <input type="number" class="form-control" id="fever" placeholder="Enter body temperature" name="fever"
+                    step="0.1" required value="98.8">
+                  <span class="input-group-addon">°F</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="weight">Weight:</label>
+                <div class="col-sm-10 input-group">
+                  <input type="number" class="form-control" id="weight" placeholder="Enter weight" name="weight"
+                    required>
+                  <span class="input-group-addon">kg</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="sugar">Sugar Level:</label>
+                <div class="col-sm-10 input-group">
+                  <input type="number" class="form-control" id="sugar" placeholder="Enter blood sugar level"
+                    name="sugar" required value="80">
+                  <span class="input-group-addon">mg/dL</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="remarks">Remarks:</label>
+                <div class="col-sm-10 input-group">
+                  <textarea class="form-control" id="remarks" placeholder="Enter remarks" name="remarks"
+                    rows="3"></textarea>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="medicine">Medicines:</label>
+                <div class="col-sm-10 input-group">
+                  <textarea class="form-control" id="medicine" placeholder="Enter prescribed medicines" name="medicine"
+                    rows="3"></textarea>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="follow_up">Follow-up Date:</label>
+                <div class="col-sm-10 input-group">
+                  <input type="date" class="form-control" id="follow_up" name="follow_up">
+                </div>
+              </div>
+
+
+
+              <div class="form-group">
+                <div class="col-sm-12 text-center">
+                  <button type="submit" class="btn btn-success btn-block" style="font-size:16px;">Add
+                    Consultation</button>
+                  <a href="/close_consultation"><button type="button" class="btn btn-danger btn-block" style="font-size:16px;">Cancel</button></a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
