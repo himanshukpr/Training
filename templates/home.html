@@ -14,19 +14,23 @@
       background: #f5f6fa;
       padding-bottom: 20px;
     }
+
     .navbar-inverse {
       background-color: #3498db;
       border-color: #2980b9;
     }
-    .navbar-inverse .navbar-brand, 
-    .navbar-inverse .navbar-nav > li > a {
+
+    .navbar-inverse .navbar-brand,
+    .navbar-inverse .navbar-nav>li>a {
       color: white;
     }
-    .navbar-inverse .navbar-nav > .active > a,
-    .navbar-inverse .navbar-nav > .active > a:focus,
-    .navbar-inverse .navbar-nav > .active > a:hover {
+
+    .navbar-inverse .navbar-nav>.active>a,
+    .navbar-inverse .navbar-nav>.active>a:focus,
+    .navbar-inverse .navbar-nav>.active>a:hover {
       background-color: #2980b9;
     }
+
     .welcome-header {
       background-color: #3498db;
       color: white;
@@ -38,7 +42,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-inverse">
+      <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -54,7 +58,7 @@
         <ul class="nav navbar-nav">
           <li class="active"><a href="/home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
           <li><a href="/fetch-patients"><span class="glyphicon glyphicon-list"></span> View Patients</a></li>
-          
+
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -62,7 +66,7 @@
       </div>
     </div>
   </nav>
-  
+
   <div class="container">
     <div class="welcome-header">
       <div class="row">
@@ -79,203 +83,229 @@
 
 
 
-<div class="row">
-  <div class="col-md-4">
-    <div class="stat-card">
-      <span class="glyphicon glyphicon-user"></span>
-      <h3>{{total_patients}}</h3>
-      <p>Total Patients</p>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="stat-card">
+          <span class="glyphicon glyphicon-user"></span>
+          <h3>{{total_patients}}</h3>
+          <p>Total Patients</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card">
+          <span class="glyphicon glyphicon-calendar"></span>
+          <h3>{{total_appointments}}</h3>
+          <p>Today's Appointments</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card">
+          <span class="glyphicon glyphicon-list-alt"></span>
+          <h3>{{total_consultations}}</h3>
+          <p>Total Consulted</p>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="col-md-4">
-    <div class="stat-card">
-      <span class="glyphicon glyphicon-calendar"></span>
-      <h3>{{total_appointments}}</h3>
-      <p>Today's Appointments</p>
+
+    <div class="text-center" style="margin-bottom: 30px;">
+      <button onclick="document.getElementById('patientModal').style.display='block'" title="Add Patient"
+        class="btn btn-primary btn-lg">
+        <span class="glyphicon glyphicon-plus"></span> Add New Patient
+      </button>
     </div>
-  </div>
-  <div class="col-md-4">
-    <div class="stat-card">
-      <span class="glyphicon glyphicon-list-alt"></span>
-      <h3>{{total_consultations}}</h3>
-      <p>Total Consulted</p>
-    </div>
-  </div>
-</div>
 
-<div class="text-center" style="margin-bottom: 30px;">
-  <button onclick="document.getElementById('patientModal').style.display='block'" title="Add Patient" class="btn btn-primary btn-lg">
-    <span class="glyphicon glyphicon-plus"></span> Add New Patient
-  </button>
-</div>
+    <div id="patientModal" class="w3-modal">
+      <div class="w3-modal-content w3-animate-zoom w3-card-4"
+        style="max-width: 900px; border-radius: 8px; overflow: hidden;">
+        <header class="w3-container w3-teal" style="padding: 16px; background-color: #3498db !important;">
+          <span onclick="document.getElementById('patientModal').style.display='none'"
+            class="w3-button w3-display-topright" style="font-size: 20px;">&times;</span>
+          <h2 style="margin: 0; color: white;"><span class="glyphicon glyphicon-user"></span> Add New Patient</h2>
+        </header>
 
-<div id="patientModal" class="w3-modal">
-  <div class="w3-modal-content w3-animate-zoom w3-card-4" style="max-width: 900px; border-radius: 8px; overflow: hidden;">
-    <header class="w3-container w3-teal" style="padding: 16px; background-color: #3498db !important;">
-      <span onclick="document.getElementById('patientModal').style.display='none'" 
-        class="w3-button w3-display-topright" style="font-size: 20px;">&times;</span>
-      <h2 style="margin: 0; color: white;"><span class="glyphicon glyphicon-user"></span> Add New Patient</h2>
-    </header>
-    
-    <div class="panel-body" style="padding: 30px;">
-      <!-- Placeholder for error/success messages -->
-      <div id="message" class="alert" style="display:none;"></div>
+        <div class="panel-body" style="padding: 30px;">
+          <!-- Placeholder for error/success messages -->
+          <div id="message" class="alert" style="display:none;"></div>
 
-      <form class="form-horizontal" action="/add-patient-details" method="post">
-        
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label class="control-label col-sm-4" for="name">Name:</label>
-              <div class="col-sm-8 input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input type="text" class="form-control" id="name" placeholder="Enter name"
-                    name="name" required>
+          <form class="form-horizontal" action="/add-patient-details" method="post">
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label col-sm-4" for="name">Name:</label>
+                  <div class="col-sm-8 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-sm-4" for="phone">Phone:</label>
+                  <div class="col-sm-8 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                    <input type="tel" class="form-control" id="phone" placeholder="Enter phone number" name="phone"
+                      required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-sm-4" for="email">Email:</label>
+                  <div class="col-sm-8 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label col-sm-4" for="gender">Gender:</label>
+                  <div class="col-sm-8 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <select class="form-control" id="gender" name="gender" required>
+                      <option value="">Select gender</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-sm-4" for="age">Age:</label>
+                  <div class="col-sm-8 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                    <input type="number" class="form-control" id="age" placeholder="Enter age" name="age" required>
+                  </div>
+                </div>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="control-label col-sm-4" for="phone">Phone:</label>
-              <div class="col-sm-8 input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-                <input type="tel" class="form-control" id="phone" placeholder="Enter phone number"
-                    name="phone" required>
+              <label class="control-label col-sm-2" for="address">Address:</label>
+              <div class="col-sm-10 input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                <input type="text" class="form-control" id="address" placeholder="Enter address" name="address"
+                  required>
               </div>
             </div>
 
-            <div class="form-group">
-              <label class="control-label col-sm-4" for="email">Email:</label>
-              <div class="col-sm-8 input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                <input type="email" class="form-control" id="email" placeholder="Enter email"
-                    name="email" required>
+            <div class="form-group" style="margin-top: 20px;">
+              <div class="col-sm-12">
+                <div class="btn-group btn-group-justified">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default"
+                      onclick="document.getElementById('patientModal').style.display='none'">
+                      <span class="glyphicon glyphicon-remove"></span> Cancel
+                    </button>
+                  </div>
+                  <div class="btn-group">
+                    <button type="reset" class="btn btn-warning">
+                      <span class="glyphicon glyphicon-refresh"></span> Reset
+                    </button>
+                  </div>
+                  <div class="btn-group">
+                    <button type="submit" class="btn btn-success">
+                      <span class="glyphicon glyphicon-ok"></span> Add Patient
+                    </button>
+                  </div>
+                </div>
               </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-calendar"></span> Today's Appointments</h3>
+          </div>
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th>Time</th>
+                    <th>Patient Name</th>
+                    <th>Purpose</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>09:00 AM</td>
+                    <td>John Smith</td>
+                    <td>Follow-up</td>
+                    <td><span class="label label-success">Confirmed</span></td>
+                    <td>
+                      <button class="btn btn-xs btn-info"><span class="glyphicon glyphicon-eye-open"></span>
+                        View</button>
+                      <button class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-edit"></span>
+                        Edit</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>10:30 AM</td>
+                    <td>Sarah Johnson</td>
+                    <td>Initial Consultation</td>
+                    <td><span class="label label-warning">Pending</span></td>
+                    <td>
+                      <button class="btn btn-xs btn-info"><span class="glyphicon glyphicon-eye-open"></span>
+                        View</button>
+                      <button class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-edit"></span>
+                        Edit</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>02:15 PM</td>
+                    <td>Michael Brown</td>
+                    <td>Lab Results</td>
+                    <td><span class="label label-success">Confirmed</span></td>
+                    <td>
+                      <button class="btn btn-xs btn-info"><span class="glyphicon glyphicon-eye-open"></span>
+                        View</button>
+                      <button class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-edit"></span>
+                        Edit</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
-          
-          <div class="col-md-6">
-            <div class="form-group">
-              <label class="control-label col-sm-4" for="gender">Gender:</label>
-              <div class="col-sm-8 input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <select class="form-control" id="gender" name="gender" required>
-                    <option value="">Select gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-sm-4" for="age">Age:</label>
-              <div class="col-sm-8 input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                <input type="number" class="form-control" id="age" placeholder="Enter age"
-                    name="age" required>
-              </div>
-            </div>
+          <div class="panel-footer text-right">
+            <a href="#" class="btn btn-primary btn-sm">View All Appointments</a>
           </div>
         </div>
-        
+      </div>
+    </div>
+
+
+    <div class="container">
+      <form action="/search-patient" method="post">
         <div class="form-group">
-          <label class="control-label col-sm-2" for="address">Address:</label>
-          <div class="col-sm-10 input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-            <input type="text" class="form-control" id="address" placeholder="Enter address"
-                name="address" required>
+
+          <label class="control-label col-sm-4" for="age">Search:</label>
+          <div class="form-group">
+
+            <input type="search" class="form-control" id="search" placeholder="Enter Name, Email, Phone" name="search"
+              required>
           </div>
         </div>
-
-        <div class="form-group" style="margin-top: 20px;">
-          <div class="col-sm-12">
-            <div class="btn-group btn-group-justified">
-              <div class="btn-group">
-                <button type="button" class="btn btn-default" onclick="document.getElementById('patientModal').style.display='none'">
-                  <span class="glyphicon glyphicon-remove"></span> Cancel
-                </button>
-              </div>
-              <div class="btn-group">
-                <button type="reset" class="btn btn-warning">
-                  <span class="glyphicon glyphicon-refresh"></span> Reset
-                </button>
-              </div>
-              <div class="btn-group">
-                <button type="submit" class="btn btn-success">
-                  <span class="glyphicon glyphicon-ok"></span> Add Patient
-                </button>
-              </div>
-            </div>
+        <div class="form-group">
+          <div class="col-sm-12 text-center">
+            <button type="submit" class="btn btn-info btn-block" style="font-size:16px;">Search</button>
           </div>
         </div>
       </form>
     </div>
-  </div>
-</div>
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title"><span class="glyphicon glyphicon-calendar"></span> Today's Appointments</h3>
-      </div>
-      <div class="panel-body">
-        <div class="table-responsive">
-          <table class="table table-striped table-hover">
-            <thead>
-              <tr>
-                <th>Time</th>
-                <th>Patient Name</th>
-                <th>Purpose</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>09:00 AM</td>
-                <td>John Smith</td>
-                <td>Follow-up</td>
-                <td><span class="label label-success">Confirmed</span></td>
-                <td>
-                  <button class="btn btn-xs btn-info"><span class="glyphicon glyphicon-eye-open"></span> View</button>
-                  <button class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-edit"></span> Edit</button>
-                </td>
-              </tr>
-              <tr>
-                <td>10:30 AM</td>
-                <td>Sarah Johnson</td>
-                <td>Initial Consultation</td>
-                <td><span class="label label-warning">Pending</span></td>
-                <td>
-                  <button class="btn btn-xs btn-info"><span class="glyphicon glyphicon-eye-open"></span> View</button>
-                  <button class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-edit"></span> Edit</button>
-                </td>
-              </tr>
-              <tr>
-                <td>02:15 PM</td>
-                <td>Michael Brown</td>
-                <td>Lab Results</td>
-                <td><span class="label label-success">Confirmed</span></td>
-                <td>
-                  <button class="btn btn-xs btn-info"><span class="glyphicon glyphicon-eye-open"></span> View</button>
-                  <button class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-edit"></span> Edit</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="panel-footer text-right">
-        <a href="#" class="btn btn-primary btn-sm">View All Appointments</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<footer class="text-center" style="margin-top: 20px; padding: 10px; color: #777;">
-  <p>&copy; 2025 Doctor's App. All rights reserved.</p>
-</footer>
+    <footer class="text-center" style="margin-top: 20px; padding: 10px; color: #777;">
+      <p>&copy; 2025 Doctor's App. All rights reserved.</p>
+    </footer>
 
 </body>
 

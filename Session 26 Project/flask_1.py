@@ -358,6 +358,28 @@ def update_consultation_details(id):
    
 
 
+@app.route('/search-patient', methods=['POST'])
+def search_patient():
+    if len(session['user_id']) > 0:
+        search = request.form['search']
+        db.select_db(collection='Patient')
+
+        query = {
+            'doctor_id': session['user_id'],
+            '$or' : [
+                {'name': {'$regex' : search, '$options': 'i'}},
+                {'phone': {'$regex' : search, '$options': 'i'}},
+                {'email': {'$regex' : search, '$options': 'i'}}
+            ]
+        }
+
+        result = db.fetch(query)
+        if len(result) > 0:
+            return render_template('patients.html', name=session['name'], email=session['email'],
+                                   total=len(result), patients=result)
+        else:
+            return render_template('error.html', message='No patients found with the given search criteria')
+
 def main():
     # secret key is used to session management, it is required for session management
     app.secret_key  = 'doctors-app-key-v1'
