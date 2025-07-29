@@ -36,7 +36,7 @@
 
     <div class="container">
 
-        <h2>All Consultation</h2>
+        <h2>All Consultation of <u>{{patient['name']}}</u></h2>
         <p>Total Consultations: {{total}}</p>
         <div class="container mt-3">
             {% if consultations %}
@@ -66,7 +66,8 @@
                         <td>{{consultation['medicine']}}</td>
                         <td>{{consultation['follow_up']}}</td>
                         <td>
-                            <button>Click me</button>
+                            <a href="/delete-consultation/{{consultation['_id']}}"><button>Delete</button></a>
+                            <a href="/update-consultation/{{consultation['_id']}}"><button>Update</button></a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -74,7 +75,7 @@
             </table>
             {% else %}
             <div class="alert alert-danger">
-                <strong>Error!</strong> No Consulation found
+             No Consulation found of <strong>{{patient['name']}}</strong>
             </div>
             {% endif %}
             <a href="/fetch-patients"><button class="btn-success">Close</button></a>

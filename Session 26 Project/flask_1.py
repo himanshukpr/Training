@@ -27,24 +27,44 @@ def index():
 # view
 @app.route('/register')
 def register():
+        
     return render_template('Register.html')
+    
 
 @app.route('/home')
 def home():
     if len(session['user_id']) > 0:
-        return render_template('home.html',name = session['name'],email = session['email'],login_at = session['login_at'])
+        db.select_db(collection='User')
+        query = {
+            '_id': ObjectId(session['user_id'])
+        }
+        user = db.fetch(query)[0]
+
+        db.select_db(collection='Patient')
+        query = {
+            'doctor_id': session['user_id']
+        }
+        patient = db.fetch(query)
+
+        db.select_db(collection='Consultation')
+        query = {
+            'doctor_id': session['user_id']
+        }
+        Consultation = db.fetch(query)
+
+        query = {
+            'doctor_id': session['user_id'],
+            'follow_up': datetime.datetime.now().strftime('%Y-%m-%d')
+        }
+        total_appointments = db.fetch(query)
+        return render_template('home.html',user = user, login_at = session['login_at'], total_patients = len(patient), total_consultations = len(Consultation),total_appointments = len(total_appointments))
     else:
         return redirect('/')
 
-@app.route('/add-patient')
-def add_patient():
-    if len(session['user_id']) > 0:
-        return render_template('add-patient.html')
-        
-    else:
-        return redirect('/')
+
 
 # controller function
+# Log on
 @app.route('/add-user',methods=['POST'])
 def add_user_in_db():
     user = User()
@@ -69,7 +89,7 @@ def add_user_in_db():
         return 'Something went wrong, please Try again later'
 
 
-
+# Log in
 @app.route('/fetch-user',methods=['POST'])
 def fetch_user_from_db():
 
@@ -93,6 +113,17 @@ def fetch_user_from_db():
     else:
         return render_template('error.html',message = 'User not found, please register first')
     
+
+
+@app.route('/add-patient')
+def add_patient():
+    if len(session['user_id']) > 0:
+        return render_template('add-patient.html')
+        
+    else:
+        return redirect('/')
+    
+
 @app.route('/add-patient-details', methods=['POST'])
 def add_patient_details():
     patient = Patient(
@@ -125,7 +156,9 @@ def fetch_patients_from_db():
             'doctor_id':session['user_id']
         }
         documents = db.fetch(query)
-        # if len(documents) > 0:
+        
+        
+
         return render_template('patients.html',name = session['name'],email = session['email'],
                             total = len(documents), patients = documents)
         # else:
@@ -179,7 +212,7 @@ def update_patient_details(id):
 
     result = db.update(query, patient.to_document())
     if result:
-        return redirect('/home')
+        return redirect('/fetch-patients')
     else:
         return redirect('error.html',message = 'Something went wrong, please try again later')
    
@@ -216,7 +249,7 @@ def add_consultation_details():
         patient_id=session['patient_id'],
         doctor_id=session['user_id']
     )
-    session['patient_id'] = ''
+    
 
     db.select_db(collection='Consultation')
     result = db.insert(consultation.to_document())
@@ -234,17 +267,96 @@ def close_consultation():
 @app.route('/view-consultation/<id>')
 def fetch_consultation(id):
     if len(session['user_id']) > 0:
-
+        session['patient_id'] = id
         db.select_db(collection='Consultation')
         query = {
             'doctor_id':session['user_id'],
             'patient_id':id
         }
         documents = db.fetch(query)
-        return render_template('view-consultation.html',total = len(documents), consultations = documents)
+
+        db.select_db(collection='Patient')
+        patient_query = {
+            '_id': ObjectId(id)
+        }
+
+        patient = db.fetch(patient_query)
+        if len(patient) > 0:
+            patient = patient[0]
+        else:
+            return render_template('error.html', message='Patient not found, please try again later')
+        
+        return render_template('view-consultation.html',total = len(documents), consultations = documents, patient=patient)
         
     else:
         return redirect('/')
+
+@app.route('/delete-consultation/<id>')
+def delete_consultation(id):
+    
+    db.select_db(collection='Consultation')
+    query = {
+        '_id': ObjectId(id)
+    }
+
+    result = db.delete(query)
+    if result:
+        return redirect('/fetch-patients')
+    else:
+        return render_template('/fetch-patients')
+        
+
+@app.route('/update-consultation/<id>')
+def update_consultation(id):
+    if len(session['user_id']) > 0:
+        db.select_db(collection='Consultation')
+        query = {
+            '_id' : ObjectId(id)
+        }
+        documents = db.fetch(query)
+        if len(documents) > 0:
+            document = documents[0]
+        else:
+            return render_template('error.html', message='Consultation not found, please try again later')
+        return render_template('update-consultation.html', consultation=document)
+    else:
+        return redirect('/')
+
+   
+@app.route('/update-consultation-details/<id>', methods=['POST'])
+def update_consultation_details(id):
+    # bphigh, bplow, fever, weigth, sugar,remarks, medicine, follow_up
+
+    
+
+    consultation = Consultation(
+        bphigh=request.form['bphigh'],
+        bplow=request.form['bplow'],
+        fever=request.form['fever'],
+        weight=request.form['weight'],
+        sugar=request.form['sugar'],
+        remarks=request.form['remarks'],
+        medicine=request.form['medicine'],
+        follow_up=request.form['follow_up'],
+        patient_id=session['patient_id'],
+        doctor_id=session['user_id']
+    )
+    
+
+    query = {
+        '_id' : ObjectId(id)
+    }
+    
+    db.select_db(collection='Consultation')
+    
+    result = db.update(query, consultation.to_document())
+
+    if result:
+        return redirect('/fetch-patients')
+    else:
+        return redirect('error.html',message = 'Something went wrong, please try again later')
+   
+
 
 def main():
     # secret key is used to session management, it is required for session management
