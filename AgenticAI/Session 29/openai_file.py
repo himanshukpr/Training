@@ -1,6 +1,5 @@
 from openai import OpenAI
-
-OPEN_AI_KEY = "ai key"
+OPEN_AI_KEY = "sk-mnopqrstijkl5678mnopqrstijkl5678mnopqrst"
 client = OpenAI(api_key=OPEN_AI_KEY)
 
 
